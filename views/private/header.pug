@@ -1,0 +1,15 @@
+block header
+  header
+    div
+      div#private-header
+        h1 player: #{username}
+        .header-div-btn
+          form(action="/" method="get")
+            div
+              input(class="header-btn"  type="submit" value="Home")
+          form(action="/history" method="get")
+            div
+              input( class="header-btn" type="submit" value="History")
+          form(action="/auth/logout" method="post")
+            div
+              input(id="logout-btn" class="header-btn" type="submit" value="Sign out")

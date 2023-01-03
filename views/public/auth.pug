@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  div#auth
+    #auth-login
+      #auth-login-div
+        h1 Login
+
+        form(action="/auth/login" method="post")
+          div
+            label(for="username")
+            input(type="text" name="username" placeholder="username")
+
+          div
+            label(for="password")
+            input(type="password" name="password" placeholder="password")
+
+          .auth-submit-div
+            input(class="auth-submit-btn" type="submit" value="Login")
+
+    #auth-signup
+      #auth-signup-div
+        h1 Register
+        form(action="/auth/register" method="post")
+          div
+            label(for="username")
+            input(type="text" name="username" placeholder="username, 3 characters minimum" minLength=3)
+
+          div
+            label(for="password")
+            input(type="password" name="password" placeholder="password, 3 characters minimum" minLength=3)
+
+          .auth-submit-div
+            input(class="auth-submit-btn"  type="submit" value="Register")
