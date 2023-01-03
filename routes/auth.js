@@ -3,16 +3,16 @@ const Users = require('../controllers/users');
 
 const router = express.Router();
 
-const handleLogin =
-	(req, res) =>
-	({ id, username }) => {
-		req.session.authenticated = true;
-		req.session.userId = id;
-		req.session.username = username;
-		req.session.games = [];
+const handleLogin = (req, res) => {
+	const { id, username } = req.body;
 
-		res.redirect('/');
-	};
+	req.session.authenticated = true;
+	req.session.userId = id;
+	req.session.username = username;
+	req.session.games = [];
+
+	res.redirect('/');
+};
 
 const handleError = (res, redirectUri) => (error) => {
 	console.log({ error });
@@ -36,11 +36,8 @@ router.post('/register', (req, res) => {
 	const { username, password } = req.body;
 
 	Users.register({ username, password })
-		.then(res.redirect('/'))
+		.then(handleLogin(req, res))
 		.catch(handleError(res, '/'));
-	// TODO log in user after registration
-	// .then(handleLogin(req, res))
-	// .catch(handleError(res, '/'));
 });
 
 router.post('/logout', (req, res) => {
