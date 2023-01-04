@@ -10,6 +10,8 @@ const REGISTER_USER =
 const LOGIN_USER =
 	'SELECT id, username, password FROM users WHERE username=${username}';
 
+const DELETE_USER_BY_ID = 'DELETE FROM users WHERE id=${id}';
+
 const register = ({ username, password }) => {
 	return db
 		.none(LOOKUP_USER_BY_USERNAME, { username })
@@ -17,6 +19,14 @@ const register = ({ username, password }) => {
 		.then((hash) => {
 			db.one(REGISTER_USER, { username, password: hash });
 		});
+};
+
+const findUserByUsername = ({ username }) => {
+	return db.one(LOOKUP_USER_BY_USERNAME, { username });
+};
+
+const deleteUserById = ({ id }) => {
+	return db.none(DELETE_USER_BY_ID, { id });
 };
 
 const login = ({ username, password }) => {
@@ -39,4 +49,4 @@ const login = ({ username, password }) => {
 		});
 };
 
-module.exports = { register, login };
+module.exports = { register, login, findUserByUsername, deleteUserById };
