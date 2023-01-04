@@ -32,7 +32,8 @@ Deployed to [Render](https://mastermind.onrender.com/auth)
 
 # Design Process
 
-I started with designing the game logic:
+I started with designing the game logic: <br/>
+<img width="621" alt="Screenshot 2023-01-04 at 10 06 13" src="https://user-images.githubusercontent.com/47907411/210621068-633edcd3-62bf-4af0-946e-f493aca4dd1d.png">
 
 
 # Project specifications
