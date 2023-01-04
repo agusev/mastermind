@@ -1,3 +1,5 @@
+// configuration for express session
+
 const session = require('express-session');
 
 const sessionInstance = session({

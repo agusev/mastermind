@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+//  starts a server and listens on port
+
 /**
  * Module dependencies.
  */
