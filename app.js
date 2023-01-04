@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const indexRouter = require('./routes/index');
+const gameRouter = require('./routes/game');
 const authRouter = require('./routes/auth');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/auth', authRouter);
 
 // protected routes
 app.use('/', protect, indexRouter);
+app.use('/game', protect, gameRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
