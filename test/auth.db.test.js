@@ -1,8 +1,49 @@
+const app = require('../app');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 const assert = require('assert');
 const Users = require('../controllers/users');
+const { expect } = require('chai');
+
+chai.use(chaiHttp);
+chai.should();
 
 // tests auth page
 describe('Auth page', function () {
+	// verify that auth page is rendered
+
+	const loginId = 'auth-login-form';
+	const registerId = 'auth-register-form';
+
+	describe('GET /auth', function () {
+		it('returns 200', (done) => {
+			chai.request(app)
+				.get('/auth')
+				.end(function (err, res) {
+					expect(res).to.have.status(200);
+					done();
+				});
+		});
+
+		it('login form rendered', (done) => {
+			chai.request(app)
+				.get('/auth')
+				.end(function (err, res) {
+					expect(res.text.includes(loginId));
+					done();
+				});
+		});
+
+		it('register form rendered', (done) => {
+			chai.request(app)
+				.get('/auth')
+				.end(function (err, res) {
+					expect(res.text.includes(registerId));
+					done();
+				});
+		});
+	});
+
 	// tests user to be save in database
 	describe('register', function () {
 		const username = 'testUser';
@@ -19,8 +60,8 @@ describe('Auth page', function () {
 			await Users.deleteUserById({ id });
 		});
 
-		describe('User can be registered', function () {
-			it('Should return id if user created', async function () {
+		describe('POST /auth/register', function () {
+			it('should return user id', async function () {
 				let { id } = await Users.findUserByUsername({ username });
 
 				assert(id != undefined);
@@ -44,8 +85,8 @@ describe('Auth page', function () {
 			await Users.deleteUserById({ id });
 		});
 
-		describe('User exists', function () {
-			it('Should return id if user exists', async function () {
+		describe('POST /auth/login', function () {
+			it('should return id if user exists', async function () {
 				let { id } = await Users.findUserByUsername({ username });
 
 				assert(id != undefined);

@@ -6,7 +6,7 @@ block content
       #auth-login-div
         h1 Login
 
-        form(action="/auth/login" method="post")
+        form(id="auth-login-form" action="/auth/login" method="post")
           div
             label(for="username")
             input(type="text" name="username" placeholder="username")
@@ -21,7 +21,7 @@ block content
     #auth-signup
       #auth-signup-div
         h1 Register
-        form(action="/auth/register" method="post")
+        form(id="auth-register-form" action="/auth/register" method="post")
           div
             label(for="username")
             input(type="text" name="username" placeholder="username, 3 characters minimum" minLength=3)
