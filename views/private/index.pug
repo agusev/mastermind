@@ -4,4 +4,15 @@ block content
   - const levels = ['Easy', 'Medium', 'Hard']
   - let i = -1
   div#wrapper
-      h1 welcome
+      #start-form
+        form(id='select-level-form' action="/game/start" method="post")
+          .choose-level
+            h3 Choose your level
+            .level-list
+              while i++ < levels.length-1
+                input.radioInput(id='level-select-'+i, type='radio', name='level-select-form', value=i checked = i == 0 ? true : false)
+                label(for='level-select-'+i)= levels[i]
+          .guess-submit-btn 
+            input(type="submit" value="Play")
+
+      include rules.pug
