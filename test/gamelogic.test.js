@@ -45,14 +45,22 @@ describe('GAME LOGIC', function () {
 
 	describe('feedback.js', function () {
 		it('should return correct feedback array', () => {
-			let gameData = {
+			let gameData1 = {
 				current: 1,
 				code: '1234',
+				style: '0',
+			};
+
+			let gameData2 = {
+				current: 1,
+				code: '1234',
+				style: '1',
 			};
 
 			let feedbackArr1 = ['', '', '', '', '', '', ''];
 			let feedbackArr2 = ['', '', '', '', '', '', ''];
 			let feedbackArr3 = ['', '', '', '', '', '', ''];
+			let feedbackArr4 = ['', '', '', '', '', '', ''];
 
 			const input1 = '1234';
 			const input2 = '4321';
@@ -61,35 +69,47 @@ describe('GAME LOGIC', function () {
 			const result1 = GameLogic.updateMoveResult(
 				input1,
 				feedbackArr1,
-				gameData
+				gameData1
 			);
 
 			const result2 = GameLogic.updateMoveResult(
 				input2,
 				feedbackArr2,
-				gameData
+				gameData1
 			);
 
 			const result3 = GameLogic.updateMoveResult(
 				input3,
 				feedbackArr3,
-				gameData
+				gameData1
 			);
 
-			assert(result1[gameData.current] === 'all correct!!!');
+			const result4 = GameLogic.updateMoveResult(
+				input2,
+				feedbackArr4,
+				gameData2
+			);
+
+			assert(result1[gameData1.current] === 'all correct!!!');
+
 			assert(
-				result2[gameData.current] ===
+				result2[gameData1.current] ===
 					'4 correct numbers and 0 correct locations'
 			);
 
-			assert(result3[gameData.current] === 'all incorrect...');
+			assert(result3[gameData1.current] === 'all incorrect...');
+
+			assert(
+				result4[gameData2.current] ===
+					'4 correct emoji and 0 correct locations'
+			);
 		});
 	});
 
 	describe('hints.js', function () {
 		it('should return correct hint digit', () => {
 			const code1 = '1234';
-			let hintArr1 = ['1', '2', '4', '-', '-', '-', '-', '-', '-', '-'];
+			let hintArr1 = [1, 2, 4, '-', '-', '-', '-', '-', '-', '-'];
 			const result1 = GameLogic.getCurrentHintDigit(code1, hintArr1);
 
 			assert(result1 === 3);

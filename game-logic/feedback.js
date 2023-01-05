@@ -7,6 +7,15 @@ const updateMoveResult = (input, feedbackArr, gameData) => {
 	const currentFeedbackExactMatch = checkExactMatch(inputArr, codeArr);
 	const currentFeedbackOtherMatch = checkOtherMatch(inputArr, codeArr);
 
+	const textSingular =
+		gameData.style == 0 ? 'number' : gameData.style == 6 ? 'note' : 'emoji';
+	const textPlural =
+		gameData.style == 0
+			? 'numbers'
+			: gameData.style == 6
+			? 'notes'
+			: 'emoji';
+
 	if (currentFeedbackExactMatch == 0 && currentFeedbackOtherMatch == 0) {
 		feedbackArr[gameData.current] += 'all incorrect...';
 	} else if (
@@ -18,8 +27,8 @@ const updateMoveResult = (input, feedbackArr, gameData) => {
 		feedbackArr[gameData.current] += currentFeedbackOtherMatch;
 		feedbackArr[gameData.current] +=
 			currentFeedbackOtherMatch == 1
-				? ' correct number and '
-				: ' correct numbers and ';
+				? ' correct ' + textSingular + ' and '
+				: ' correct ' + textPlural + ' and ';
 
 		feedbackArr[gameData.current] += currentFeedbackExactMatch;
 		feedbackArr[gameData.current] +=

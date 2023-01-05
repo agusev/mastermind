@@ -16,20 +16,20 @@ const {
 	TIME,
 } = constants;
 
-const initialize = (level) => {
+const initialize = (level, style) => {
 	let gameData = {};
 
 	switch (level) {
 		case '0':
-			generateEasyGame(gameData, level);
+			generateEasyGame(gameData, level, style);
 			break;
 
 		case '1':
-			generateMediumGame(gameData, level);
+			generateMediumGame(gameData, level, style);
 			break;
 
 		case '2':
-			generateHardGame(gameData, level);
+			generateHardGame(gameData, level, style);
 			break;
 
 		default:
@@ -39,7 +39,7 @@ const initialize = (level) => {
 	return gameData;
 };
 
-const generateEasyGame = (gameData, level) => {
+const generateEasyGame = (gameData, level, style) => {
 	gameData.totalAttempts = TOTAL_ATTEMPTS_EASY;
 	gameData.complexity = level;
 	gameData.hints = TOTAL_HINTS_EASY;
@@ -49,12 +49,13 @@ const generateEasyGame = (gameData, level) => {
 	gameData.codeLen = CODE_LEN_EASY;
 	gameData.hints = TOTAL_HINTS_EASY;
 	gameData.status = 'In Progress';
+	gameData.style = style;
 	gameData.timer = TIME;
 
 	return gameData;
 };
 
-const generateMediumGame = (gameData, level) => {
+const generateMediumGame = (gameData, level, style) => {
 	gameData.totalAttempts = TOTAL_ATTEMPTS_MEDIUM;
 	gameData.complexity = level;
 	gameData.hints = TOTAL_HINTS_MEDIUM;
@@ -63,13 +64,13 @@ const generateMediumGame = (gameData, level) => {
 	gameData.remainedGuesses = TOTAL_GUESSES_REMAINED_MEDIUM;
 	gameData.codeLen = CODE_LEN_MEDIUM;
 	gameData.hints = TOTAL_HINTS_MEDIUM;
-	gameData.status = 'In Progress';
+	gameData.style = style;
 	gameData.timer = TIME;
 
 	return gameData;
 };
 
-const generateHardGame = (gameData, level) => {
+const generateHardGame = (gameData, level, style) => {
 	gameData.totalAttempts = TOTAL_ATTEMPTS_HARD;
 	gameData.complexity = level;
 	gameData.hints = TOTAL_HINTS_HARD;
@@ -79,6 +80,7 @@ const generateHardGame = (gameData, level) => {
 	gameData.codeLen = CODE_LEN_HARD;
 	gameData.hints = TOTAL_HINTS_HARD;
 	gameData.status = 'In Progress';
+	gameData.style = style;
 	gameData.timer = TIME;
 
 	return gameData;
