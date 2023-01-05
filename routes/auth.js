@@ -43,12 +43,18 @@ router.post('/login', (req, res) => {
 // @route    POST /auth/register
 // @desc     Post register info
 // @access   Public
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
 	const { username, password } = req.body;
 
-	Users.register({ username, password })
-		.then(handleLogin(req, res))
-		.catch(handleError(res, '/'));
+	const userId = await Users.findUserByUsername({ username });
+
+	if (userId === null) {
+		Users.register({ username, password })
+			.then(handleLogin(req, res))
+			.catch(handleError(res, '/'));
+	} else {
+		res.redirect('/');
+	}
 });
 
 // @route    POST /auth/logout

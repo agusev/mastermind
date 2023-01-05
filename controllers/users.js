@@ -21,8 +21,9 @@ const register = ({ username, password }) => {
 		});
 };
 
-const findUserByUsername = ({ username }) => {
-	return db.one(LOOKUP_USER_BY_USERNAME, { username });
+const findUserByUsername = async ({ username }) => {
+	let query = await db.query(LOOKUP_USER_BY_USERNAME, { username });
+	return query[0] ? query[0] : null;
 };
 
 const deleteUserById = ({ id }) => {
