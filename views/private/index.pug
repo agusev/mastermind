@@ -3,15 +3,24 @@ extends layout
 block content
   - const levels = ['Easy', 'Medium', 'Hard']
   - let i = -1
+  - let j = -1
+  - const styles = ['Digits', 'Emoji', 'Animals', 'Fruits', 'Plants', 'Countries', '🎵']
+  
   div#wrapper
       #start-form
         form(id='select-level-form' action="/game/start" method="post")
           .choose-level
+            h3 Choose style
+            .level-list
+              while i++ < styles.length-1
+                input.radioInput(id='style-select-'+i, type='radio', name='style-select-form', value=i checked = i == 0 ? true : false)
+                label(for='style-select-'+i)= styles[i]
+          .choose-level
             h3 Choose your level
             .level-list
-              while i++ < levels.length-1
-                input.radioInput(id='level-select-'+i, type='radio', name='level-select-form', value=i checked = i == 0 ? true : false)
-                label(for='level-select-'+i)= levels[i]
+              while j++ < levels.length-1
+                input.radioInput(id='level-select-'+j, type='radio', name='level-select-form', value=j checked = j == 0 ? true : false)
+                label(for='level-select-'+j)= levels[j]
           .guess-submit-btn 
             input(type="submit" value="Play")
 

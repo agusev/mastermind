@@ -11,9 +11,9 @@ const TOTAL_GUESSES_REMAINED_MEDIUM = 7;
 const CODE_LEN_MEDIUM = 4;
 
 // configuration for a hard game
-const TOTAL_ATTEMPTS_HARD = 5;
+const TOTAL_ATTEMPTS_HARD = 12;
 const TOTAL_HINTS_HARD = 0;
-const TOTAL_GUESSES_REMAINED_HARD = 5;
+const TOTAL_GUESSES_REMAINED_HARD = 12;
 const CODE_LEN_HARD = 4;
 
 const TIME = 180;

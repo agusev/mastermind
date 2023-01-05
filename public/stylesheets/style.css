@@ -240,7 +240,7 @@ h3 {
 
 #rules-right > p,
 #rules-left > p {
-	padding: 1rem;
+	padding: 0.5rem;
 }
 
 .para-rules {
@@ -253,10 +253,12 @@ h3 {
 
 .choose-level {
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
-	margin: 1rem 0;
+	margin-bottom: 0.5rem;
 	border: 1px solid #fff;
 	padding-inline: 1rem;
+	width: 100%;
 }
 
 .choose-level > h3 {
