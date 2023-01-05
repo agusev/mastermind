@@ -6,16 +6,25 @@ const Users = require('../controllers/users');
 const { expect } = require('chai');
 
 chai.use(chaiHttp);
-chai.should();
+
+const server = () => {
+	const http = require('http');
+	const port = '3000';
+	app.set('port', port);
+	const server = http.createServer(app);
+	server.listen(port);
+};
 
 // tests auth page
 describe('Auth page', function () {
 	// verify that auth page is rendered
 
+	// server();
+
 	const loginId = 'auth-login-form';
 	const registerId = 'auth-register-form';
 
-	describe('GET /auth', function () {
+	describe('GET /auth', function (req, res) {
 		it('returns 200', (done) => {
 			chai.request(app)
 				.get('/auth')

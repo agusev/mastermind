@@ -25,7 +25,7 @@ const handleError = (res, redirectUri) => (error) => {
 // @route    GET /auth
 // @desc     Get auth page
 // @access   Public
-router.get('/', (_req, res) => {
+router.get('/', (req, res) => {
 	res.render('public/auth');
 });
 
