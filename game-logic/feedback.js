@@ -46,13 +46,6 @@ const checkExactMatch = (inputArr, codeArr) => {
 const checkOtherMatch = (inputArr, codeArr) => {
 	let res = 0;
 
-	// for (let i = 0; i < inputArr.length; i++) {
-	// 	if (codeArr[i] == inputArr[i]) {
-	// 		codeArr[i] = -1;
-	// 		inputArr[i] = -1;
-	// 	}
-	// }
-
 	for (let i = 0; i < inputArr.length; i++) {
 		for (let j = 0; j < codeArr.length; j++) {
 			if (codeArr[j] >= 0 && inputArr[i] >= 0) {

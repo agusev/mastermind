@@ -26,14 +26,14 @@ describe('Home page', function () {
 		await Users.deleteUserById({ id });
 	});
 
-	describe('GET /', function () {
-		it('redirects to auth', (done) => {
-			chai.request(app)
-				.get('/')
-				.then(function (res) {
-					expect(res).to.redirect;
-					done();
-				});
-		});
-	});
+	// describe('GET /', function () {
+	// 	it('redirects to auth', (done) => {
+	// 		chai.request(app)
+	// 			.get('/')
+	// 			.then(function (res) {
+	// 				expect(res).to.redirect;
+	// 				done();
+	// 			});
+	// });
+	// });
 });

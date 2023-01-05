@@ -11,7 +11,6 @@ const getCurrentHintDigit = (code, hintArr) => {
 		result = codeArr[Math.floor(Math.random() * codeArrUnique.length)];
 		while (hintArr.includes(result)) {
 			result = codeArr[Math.floor(Math.random() * 4)];
-			console.log(result);
 		}
 	} else {
 		result = -1;
