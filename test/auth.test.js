@@ -7,19 +7,9 @@ const { expect } = require('chai');
 
 chai.use(chaiHttp);
 
-const server = () => {
-	const http = require('http');
-	const port = '3000';
-	app.set('port', port);
-	const server = http.createServer(app);
-	server.listen(port);
-};
-
 // tests auth page
 describe('Auth page', function () {
 	// verify that auth page is rendered
-
-	// server();
 
 	const loginId = 'auth-login-form';
 	const registerId = 'auth-register-form';
