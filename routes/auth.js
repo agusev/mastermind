@@ -23,14 +23,14 @@ const handleError = (res, redirectUri) => (error) => {
 // Routes
 
 // @route    GET /auth
-// @desc     Get auth page
+// @desc     Gets auth page
 // @access   Public
 router.get('/', (req, res) => {
 	res.render('public/auth');
 });
 
 // @route    POST /auth/login
-// @desc     Post login info
+// @desc     Looks for the user in db and save to session
 // @access   Public
 router.post('/login', (req, res) => {
 	const { username, password } = req.body;
@@ -41,7 +41,7 @@ router.post('/login', (req, res) => {
 });
 
 // @route    POST /auth/register
-// @desc     Post register info
+// @desc     Saves a new user to db and logs in
 // @access   Public
 router.post('/register', async (req, res) => {
 	const { username, password } = req.body;
@@ -58,7 +58,7 @@ router.post('/register', async (req, res) => {
 });
 
 // @route    POST /auth/logout
-// @desc     Post destroys current session
+// @desc     Destroys current session
 // @access   Public
 router.post('/logout', (req, res) => {
 	req.session.destroy((_error) => {
