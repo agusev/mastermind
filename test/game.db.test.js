@@ -14,29 +14,27 @@ const gameData = {
 };
 
 // tests games db
-describe('Games', function () {
-	describe('DB saveGame', function () {
-		// saves a game to Games table
-		let savedGame;
-		let match = -1;
-		describe('DB saves a game', function () {
-			it('should save a game', async function () {
-				savedGame = await Games.saveGame({ gameData });
-				assert(savedGame.id >= 0);
-			});
+describe('Games DB', function () {
+	// saves a game to Games table
+	let savedGame;
+	let match = -1;
+	describe('saveGame', function () {
+		it('should save a game', async function () {
+			savedGame = await Games.saveGame({ gameData });
+			assert(savedGame.id >= 0);
 		});
+	});
 
-		// retrives at least one game
-		describe('DB retrieveGames', function () {
-			it('should return a list of saved games', async function () {
-				const gameList = await Games.retrieveGame();
-				gameList.forEach((game) => {
-					if (game.id == savedGame.id) {
-						match = game.id;
-					}
-				});
-				assert(match >= 0);
+	// retrives at least one game
+	describe('retrieveGames', function () {
+		it('should return a list of saved games', async function () {
+			const gameList = await Games.retrieveGame();
+			gameList.forEach((game) => {
+				if (game.id == savedGame.id) {
+					match = game.id;
+				}
 			});
+			assert(match >= 0);
 		});
 	});
 });
