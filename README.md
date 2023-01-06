@@ -35,6 +35,10 @@ Deployed to [Render](https://mastermind.onrender.com/auth)
 I started with designing the game logic: <br/>
 <img width="621" alt="Screenshot 2023-01-04 at 10 06 13" src="https://user-images.githubusercontent.com/47907411/210621068-633edcd3-62bf-4af0-946e-f493aca4dd1d.png">
 
+Then I drew layouts for every page so I could define what data I will need to return for rendering
+
+<img width="417" alt="Screenshot 2023-01-06 at 09 59 47" src="https://user-images.githubusercontent.com/47907411/211071400-561e22d2-dcd9-4587-be23-55ef1d721ea1.png">
+
 
 # Project specifications
 ## Features
