@@ -76,7 +76,10 @@ Open in browser (Google Chrome recommended): [localhost](http://localhost:3000)
 
 # Deployment
 
-Deployed to [Render](https://mastermind.onrender.com/auth)
+Deployed to [Render.com](https://mastermind.onrender.com/)
+
+<img width="620" alt="deployment" src="https://user-images.githubusercontent.com/47907411/211167123-fbae33a4-e0ce-440c-ae45-804a8d6471c1.png">
+
 
 # Extensions
 
