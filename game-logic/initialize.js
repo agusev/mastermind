@@ -13,7 +13,6 @@ const {
 	TOTAL_HINTS_HARD,
 	TOTAL_GUESSES_REMAINED_HARD,
 	CODE_LEN_HARD,
-	TIME,
 } = constants;
 
 const initialize = (level, style) => {
@@ -50,7 +49,6 @@ const generateEasyGame = (gameData, level, style) => {
 	gameData.hints = TOTAL_HINTS_EASY;
 	gameData.status = 'In Progress';
 	gameData.style = style;
-	gameData.timer = TIME;
 
 	return gameData;
 };
@@ -65,7 +63,6 @@ const generateMediumGame = (gameData, level, style) => {
 	gameData.codeLen = CODE_LEN_MEDIUM;
 	gameData.hints = TOTAL_HINTS_MEDIUM;
 	gameData.style = style;
-	gameData.timer = TIME;
 
 	return gameData;
 };
@@ -81,7 +78,6 @@ const generateHardGame = (gameData, level, style) => {
 	gameData.hints = TOTAL_HINTS_HARD;
 	gameData.status = 'In Progress';
 	gameData.style = style;
-	gameData.timer = TIME;
 
 	return gameData;
 };

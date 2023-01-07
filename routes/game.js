@@ -3,7 +3,6 @@ const router = express.Router();
 const GameLogic = require('../game-logic');
 const Games = require('../controllers/games');
 const constants = require('../config/constants');
-const { TIME } = constants;
 
 const handleError = (res, redirectUri) => (error) => {
 	console.log({ error });

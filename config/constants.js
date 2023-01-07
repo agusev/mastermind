@@ -16,8 +16,6 @@ const TOTAL_HINTS_HARD = 0;
 const TOTAL_GUESSES_REMAINED_HARD = 12;
 const CODE_LEN_HARD = 4;
 
-const TIME = 180;
-
 module.exports = {
 	TOTAL_ATTEMPTS_EASY,
 	TOTAL_HINTS_EASY,
@@ -31,5 +29,4 @@ module.exports = {
 	TOTAL_HINTS_HARD,
 	TOTAL_GUESSES_REMAINED_HARD,
 	CODE_LEN_HARD,
-	TIME,
 };
