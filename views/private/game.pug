@@ -3,4 +3,47 @@ extends layout
 block content
 
   div#wrapper
-    h1 game page will be here
+    - const remained = gameData.remainedGuesses
+    - const total = gameData.totalAttempts
+    - const codeLen = gameData.codeLen
+    - const current = gameData.current
+    - const status = gameData.status
+    - const hints = gameData.hints
+    - const code = gameData.code
+    - const style = gameData.style
+    - const date = gameData.date
+    - const level = gameData.complexity == 0 ? 'Easy': gameData.complexity == 1 ? 'Medium' : 'Hard'
+    - const digitOrderArr = ['1st', '2nd', '3rd', '4th']
+
+
+
+    .game-table
+      .main-numpad
+
+        .numpad-input
+          form(id="choose-form" action="/game/" method="post")
+            .numpad-left
+              .choose-digit-column
+                each cVal in [1, 2, 3, 4]
+                  div(class='choose-digit-row-' + cVal)
+                    .digit-to-select
+                      p= 'Choose ' + digitOrderArr[cVal-1] + (style == 0 ? ' digit' : style == 5 ? ' country' : style == 6 ? ' note' : ' emoji')
+                    .numpad
+                      each rVal in [0, 1, 2, 3, 4, 5, 6, 7]
+                        input.radioInput(id='radio-digit-'+cVal+'-'+rVal type='radio' name='radio-digit-'+cVal value=rVal)
+                        label(for='radio-digit-'+cVal+'-'+rVal)= rVal
+          .numpad-right
+            .guess-submit-btn 
+              input(type="submit" id="choose-form-input" form="choose-form" disabled = remained == 0 || status=='Won' || status == 'Lost' ? true : false )
+
+
+            form(id="hint-form" action="/game/hint" method="post")
+              .guess-submit-btn 
+                input(id="hint-input" type="submit" form="hint-form" value="Hint" disabled = hints == 0 || remained == 0 || status=='Won' || status == 'Lost'  ? true : hintArr[current] != '-' ? true : false)
+            form(id="result-form" action="/game/finish" method="post")
+              .result-submit-btn 
+                input(type="submit" value="Restart")
+
+
+
+
