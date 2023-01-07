@@ -3,8 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const protect = require('./app-config/protect');
-const sessionInstance = require('./app-config/session');
+const protect = require('./config/protect');
+const sessionInstance = require('./config/session');
 
 if (process.env.NODE_ENV === 'development') {
 	require('dotenv').config();
