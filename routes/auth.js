@@ -36,10 +36,15 @@ router.post('/login', async (req, res) => {
 	const { username, password } = req.body;
 	const userId = await Users.findUserByUsername({ username });
 
-	if (userId !== null) {
-		Users.login({ username, password })
-			.then(handleLogin(req, res))
-			.catch(handleError(res, '/'));
+	if (!!userId) {
+		const correctCredentials = await Users.login({ username, password });
+		if (!!correctCredentials) {
+			Users.login({ username, password })
+				.then(handleLogin(req, res))
+				.catch(handleError(res, '/'));
+		} else {
+			res.redirect('/');
+		}
 	} else {
 		res.redirect('/');
 	}

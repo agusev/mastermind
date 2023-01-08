@@ -23,7 +23,8 @@ const register = ({ username, password }) => {
 
 const findUserByUsername = async ({ username }) => {
 	let query = await db.query(LOOKUP_USER_BY_USERNAME, { username });
-	return query[0] ? query[0] : null;
+
+	return query.length > 0 ? query[0] : null;
 };
 
 const deleteUserById = ({ id }) => {
@@ -43,9 +44,7 @@ const login = ({ username, password }) => {
 			if (result) {
 				return { id, username };
 			} else {
-				return Promise.reject(
-					'Please enter a valid username and password.'
-				);
+				return null;
 			}
 		});
 };
