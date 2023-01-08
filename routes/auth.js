@@ -32,12 +32,17 @@ router.get('/', (req, res) => {
 // @route    POST /auth/login
 // @desc     Looks for the user in db and save to session
 // @access   Public
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
 	const { username, password } = req.body;
+	const userId = await Users.findUserByUsername({ username });
 
-	Users.login({ username, password })
-		.then(handleLogin(req, res))
-		.catch(handleError(res, '/'));
+	if (userId !== null) {
+		Users.login({ username, password })
+			.then(handleLogin(req, res))
+			.catch(handleError(res, '/'));
+	} else {
+		res.redirect('/');
+	}
 });
 
 // @route    POST /auth/register
