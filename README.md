@@ -4,8 +4,9 @@
 - [Mastermind Game](#mastermind-game)
 - [Сontents](#сontents)
 - [About the game](#about-the-game)
-- [Prerequisites](#prerequisites)
+- [Available scripts](#available-scripts)
 - [Build and Run Instructions](#build-and-run-instructions)
+- [Database setup](#database-setup)
 - [Deployment](#deployment)
 - [Extensions](#extensions)
 - [Future work](#future-work)
@@ -14,22 +15,91 @@
 - [Project specifications](#project-specifications)
 - [Technologies](#technologies)
 - [Dependencies](#dependencies)
+- [Challenges](#challenges)
 
 # About the game
 
-Mastermind is a strategy game  where the player has to guess a set of numbers. 
-At the start of the game the computer will randomly select a pattern of four different numbers from a total of 8 different numbers from 0 to 7
-At the end of each guess, computer will provide one of the following response as feedback:
+Mastermind is a strategy game where the player has to guess a set of numbers. 
+At the start of the game the computer will randomly select a pattern of four different numbers from 0 to 7 for a total of 8 different numbers.
+At the end of each guess, the computer will provide one of the following responses as feedback:
 - The player had guess a correct number
 - The player had guessed a correct number and its correct location
 - The player’s guess was incorrect
  
 There are 3 levels of game complexity:
-- Easy Level: 4-digit number to guess, 10 attempts to guess, and 3 hints
-- Medium Level: 4-digit number to guess, 7 attempts, and 2 hints available
+- Easy Level: 4-digit number to guess, 10 attempts, and 3 hints
+- Medium Level: 4-digit number to guess, 7 attempts, and 2 hints
 - Hard Level: 4-digit number to guess, 12 attempts, and no hints
 
-# Prerequisites
+# Available scripts
+
+[If this is you first run, go to build and run instructions](#build-and-run-instructions)
+
+Run locally on [localhost:3000](http://localhost:3000)
+
+```
+npm run start:dev
+```
+Run tests locally
+
+```
+npm run test
+```
+
+# Build and Run Instructions
+
+<ol>
+<li>Clone repository from github: 
+
+```
+git clone https://github.com/agusev/mastermind
+```
+
+</li>
+<li>Go to the application folder:
+
+```
+cd mastermind
+```
+
+</li>
+<li>
+
+[Setup PostgreSQL database](#build-and-run-instructions)
+
+</li>
+
+</li>
+
+<li>Install dependencies: 
+
+```
+npm install
+```
+
+</li>
+<li>[Optional] migrate database ( already included in <code>postinstall</code> script )
+
+```
+npm run db:migrate
+```
+
+</li>
+<li>Run locally:
+
+```
+npm run start:dev
+```
+
+</li>
+<li>Open in browser (Google Chrome recommended): 
+
+[localhost:3000](http://localhost:3000)
+</li>
+
+</ol>
+
+# Database setup
 
 Install [Postgres](https://www.postgresql.org/download/)<br>
 Create a new database: 
@@ -50,36 +120,12 @@ Example of <code>.env</code>:<br>
 DATABASE_URL=postgres://aleksandr@localhost:5432/DATABASE_NAME
 ```
 
-# Build and Run Instructions
-
-Clone repository from github: 
-```
-git clone https://github.com/agusev/mastermind
-```
-Go to the application folder:
-```
-cd mastermind
-```
-Install dependencies: 
-```
-npm install
-```
-[Optional] migrate database ( already included in `postinstall` script )
-```
-npm run db:migrate
-```
-Run locally:
-```
-npm run start:dev
-```
-Open in browser (Google Chrome recommended): [localhost](http://localhost:3000)
 
 # Deployment
 
-Deployed to [Render.com](https://mastermind.onrender.com/)
+Deployed to [Render](https://mastermind.onrender.com/auth)
 
 <img width="620" alt="deployment" src="https://user-images.githubusercontent.com/47907411/211167123-fbae33a4-e0ce-440c-ae45-804a8d6471c1.png">
-
 
 # Extensions
 
@@ -99,10 +145,9 @@ Deployed to [Render.com](https://mastermind.onrender.com/)
 # Design Process
 <ol>
 
-<li>I started to develop this application with designing the game logic. This allowed me to understand the game core logic and define required entities.</li><br>
+<li>I started to develop this application with designing the game logic. This allowed me to understand the game core logic and define required entities. This took me 3 days before I started the implementation</li><br>
 
 <img width="620" alt="logic" src="https://user-images.githubusercontent.com/47907411/210621068-633edcd3-62bf-4af0-946e-f493aca4dd1d.png">
-
 
 <li>Then I drew layouts for every page. This helped me define what objects I will need to return to the client side.</li><br>
 
@@ -180,7 +225,7 @@ mastermind
 
 <li>
 The next step was to work on the authentification process.<br>
-First, I created routes and database queries. I decided to used <code>express-session</code> 
+First, I created routes and database queries, which uses <code>express-session</code> 
 to store information about the user.<br>
 
 ```
@@ -298,7 +343,6 @@ When the game is generated in the <code>game-logic/initialize.js</code>, a new g
     codeLen: 4,
     status: 'In Progress',
     style: '0',
-    timer: 180,
     array: [
       '0', '1', '2',
       '3', '4', '5',
@@ -313,7 +357,7 @@ After each move, guess, feedback and hint arrays will be updated accordinngly.<b
 <code>game-logic/checkGameStatus.js</code> contains win conditions and will 
 update game status after each move.<br>
 
-Finally, I added tests for the game logic:<br>
+Finally, I added some tests for the game logic:<br>
 
 ```
 mastermind
@@ -350,6 +394,7 @@ GAME LOGIC
 | Get game page | GET  /game <br>uses game data from session |
 | Start a new game | POST /game/start <br>uses game data from session |
 | Make a move | POST /game <br>uses game data from session |
+| Get a hint | POST /game/hit <br>uses game data from session |
 | Finish game | POST /game/finish <br>uses game data from session |
                        
 
@@ -390,4 +435,13 @@ mastermind
 └── sequelize@6.28.0 
 ```
 
+# Challenges
+- When setting up a database, I encountered a problem: the port was already in use. 
+  I managed to start the database by killing the existing process
+```
+sudo lsof -i :5432
+sudo pkill -u postgres
+createdb test_database
+pg_ctl -D /usr/local/var/postgresql@15 start
+```
 
