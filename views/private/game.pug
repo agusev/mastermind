@@ -44,6 +44,13 @@ block content
               .result-submit-btn 
                 input(type="submit" value="Restart")
 
+      .info
+        <h1 class="info-box"><p class="info-top">Status</p><p class="info-bottom">#{status}</p></h1>
+        <h1 class="info-box"><p class="info-top">Attempts</p><p class="info-bottom">#{remained}</p></h1>
+        <h1 class="info-box"><p class="info-top">Hints</p><p class="info-bottom">#{hints}</p></h1>
+        <h1 class="info-box"><p class="info-top">Level</p><p class="info-bottom">#{level}</p></h1>
+        <h1 class="info-box"><p class="info-top">Code</p><p class="info-bottom">#{remained == 0 ? codeMask : 'X X X X'}</p></h1>
+
 
 
 
