@@ -11,14 +11,40 @@ block content
     - const hints = gameData.hints
     - const code = gameData.code
     - const style = gameData.style
+    - const array = gameData.array
     - const date = gameData.date
     - const level = gameData.complexity == 0 ? 'Easy': gameData.complexity == 1 ? 'Medium' : 'Hard'
     - const digitOrderArr = ['1st', '2nd', '3rd', '4th']
 
-
-
     .game-table
       .main-numpad
+        .game-top
+          .guess-digit-column
+            - let i = 0
+            while i < total
+              div(class = 'guess-row-' + i, id = current == i ?  'row-current' : '')
+                p.attempt-para= 'attempt ' + (i+1) + ' '
+                div(class='guess-digit-row-' + i)
+                  - let j = 0
+                  while j < codeLen
+                    div(class= 'attempt-result')
+                      p= guessesArr[i][j] == -1 ? '-' : array[guessesArr[i][j]]
+                    - j++
+                .help
+                  .attempt-feedback
+                    if feedbackArr[i].length > 0
+                      <p><strong>feedback: </strong>#{feedbackArr[i]}</p>
+
+                  .hint
+                    if hintArr[i] == -1
+                      p hint: 1 or 2 unique digits
+                    else if hintArr[i] == '-'
+                      p 
+                    else
+                      <p>hint: at least one <span class="hintArrOutput">#{hintArr[i]}</span></p>
+
+
+              - i++
 
         .numpad-input
           form(id="choose-form" action="/game/" method="post")
@@ -31,7 +57,7 @@ block content
                     .numpad
                       each rVal in [0, 1, 2, 3, 4, 5, 6, 7]
                         input.radioInput(id='radio-digit-'+cVal+'-'+rVal type='radio' name='radio-digit-'+cVal value=rVal)
-                        label(for='radio-digit-'+cVal+'-'+rVal)= rVal
+                        label(for='radio-digit-'+cVal+'-'+rVal)= array[rVal]
           .numpad-right
             .guess-submit-btn 
               input(type="submit" id="choose-form-input" form="choose-form" disabled = remained == 0 || status=='Won' || status == 'Lost' ? true : false )
