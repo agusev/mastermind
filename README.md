@@ -9,13 +9,13 @@
 - [Database setup](#database-setup)
 - [Deployment](#deployment)
 - [Extensions](#extensions)
-- [Future work](#future-work)
 - [Design Process](#design-process)
 - [Routes](#routes)
 - [Project specifications](#project-specifications)
 - [Technologies](#technologies)
 - [Dependencies](#dependencies)
 - [Challenges](#challenges)
+- [Future work](#future-work)
 
 # About the game
 
@@ -135,13 +135,6 @@ Deployed to [Render](https://mastermind.onrender.com/auth)
 - [x] Keep track of scores
 - [x] Time counter
 
-# Future work
-
-- [ ] Add levels with 3-digit and 5 digit codes
-- [ ] Add a multiplayer mode
-- [ ] Add a timer
-- [ ] add a timer for each attempt
-
 # Design Process
 <ol>
 
@@ -161,6 +154,7 @@ number of attempts and etc.
   hints: 2,
   numberOfPlayers: 1,
   current: 0,
+  status: 'In Progress'
   remainedGuesses: 7,
   codeLen: 4,
   style: '0',
@@ -424,6 +418,7 @@ When the game is generated in the <code>game-logic/initialize.js</code>, a new g
   hints: 3,
   numberOfPlayers: 1,
   current: 0,
+  status: 'In Progress'
   remainedGuesses: 10,
   codeLen: 4,
   status: 'In Progress',
@@ -559,4 +554,11 @@ sudo pkill -u postgres
 createdb test_database
 pg_ctl -D /usr/local/var/postgresql@15 start
 ```
+
+# Future work
+
+- [ ] Add levels with 3-digit and 5 digit codes
+- [ ] Add a multiplayer mode
+- [ ] Add a timer
+- [ ] add a timer for each attempt
 
