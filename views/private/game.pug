@@ -15,6 +15,7 @@ block content
     - const date = gameData.date
     - const level = gameData.complexity == 0 ? 'Easy': gameData.complexity == 1 ? 'Medium' : 'Hard'
     - const digitOrderArr = ['1st', '2nd', '3rd', '4th']
+    - const codeMask = code.split('').map(digit => ' ' + array[digit]).join('') 
 
     .game-table
       .main-numpad
