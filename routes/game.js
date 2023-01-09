@@ -156,7 +156,7 @@ router.post('/hint', (req, res) => {
 		}
 
 		// puts the hinted digit to the hints array
-		hintArr[gameData.current] = gameData.array[currentHintDigit];
+		hintArr[gameData.current] = currentHintDigit.toString();
 	} else {
 		console.log('cannot give a hint');
 	}
