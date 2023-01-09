@@ -33,7 +33,7 @@ There are 3 levels of game complexity:
 
 # Available scripts
 
-[If this is you first run, go to build and run instructions](#build-and-run-instructions)
+If this is you first run, go to build and run [instructions](#build-and-run-instructions)
 
 Run locally on [localhost:3000](http://localhost:3000)
 
@@ -149,6 +149,79 @@ Deployed to [Render](https://mastermind.onrender.com/auth)
 
 <img width="620" alt="logic" src="https://user-images.githubusercontent.com/47907411/210621068-633edcd3-62bf-4af0-946e-f493aca4dd1d.png">
 
+When user hits the start button, instance of a game object is initiated with 
+the following data structure:
+
+`gameData` object contains game configurations including level, style, 
+number of attempts and etc.
+```
+{
+  totalAttempts: 7,
+  complexity: '1',
+  hints: 2,
+  numberOfPlayers: 1,
+  current: 0,
+  remainedGuesses: 7,
+  codeLen: 4,
+  style: '0',
+  timer: 180,
+  array: ['0', '1', '2', '3', '4', '5', '6', '7'],
+  date: 1673239730119,
+  code: '3427'
+}
+```
+
+`Guesses array` is populated with negative values and is updated 
+after each submission with the user's guesses.
+```
+[
+  [ '4', '4', '5', '3' ],
+  [ '1', '2', '4', '2' ],
+  [ '4', '3', '4', '3' ],
+  [ '2', '0', '3', '4' ],
+  [ '7', '7', '1', '3' ],
+  [ -1, -1, -1, -1 ],
+  [ -1, -1, -1, -1 ],
+  [ -1, -1, -1, -1 ],
+  [ -1, -1, -1, -1 ],
+  [ -1, -1, -1, -1 ]
+]
+```
+`Feedback array` is populated with empty strings and updated after each turn.
+
+```
+[
+  '2 correct numbers and 0 correct locations',
+  '1 correct number and 1 correct location',
+  '1 correct number and 1 correct location',
+  'all incorrect...',
+  '',
+  '',
+  '',
+  '',
+  '',
+  ''
+]
+```
+
+`Hint array` is initially populated with \``-`\` values and updated each time 
+the user asks for a hint. This array also helps to check if the user is 
+already given a randomly selected digit from the secret code. Several 
+hints are defined by the game complexity unless the secret code contains 
+3 or more identic digits, e.g. '3233' or '4444', then the computer gives 
+only one hint.
+
+```
+[
+  '2', '-', '7', '-',
+  '-', '-', '-', '-',
+  '-', '-'
+]
+```
+
+The game continues until the user guesses the code or the user is out of attempts
+
+
 <li>Then I drew layouts for every page. This helped me define what objects I will need to return to the client side.</li><br>
 
 <img width="620" alt="wireframes" src="https://user-images.githubusercontent.com/47907411/211071400-561e22d2-dcd9-4587-be23-55ef1d721ea1.png">
@@ -156,21 +229,21 @@ Deployed to [Render](https://mastermind.onrender.com/auth)
 <li>Then, I defined database tables and entities that I will use later.<br>
 
  ```
-    Users
-      - id: primary key, integer, auto-increment
-      - username: string, not null
-      - password: string, not null 
-      - created_at: date, not null
-  ```
-  ```
-    Games
-      - id: primary key, integer, auto-increment
-      - username: string, not null
-      - total_attempts: string, not null 
-      - remained_attempts: string, not null 
-      - result: string, not null 
-      - complexity: integer, not null 
-      - finished_at: date, not null
+Users
+  - id: primary key, integer, auto-increment
+  - username: string, not null
+  - password: string, not null 
+  - created_at: date, not null
+```
+```
+Games
+  - id: primary key, integer, auto-increment
+  - username: string, not null
+  - total_attempts: string, not null 
+  - remained_attempts: string, not null 
+  - result: string, not null 
+  - complexity: integer, not null 
+  - finished_at: date, not null
   ```
   </li>
 <li>To create the express application skeleton I used <code>express-generator</code>:<br>
@@ -180,8 +253,10 @@ npx express-generator mastermind --view=pug
 cd mastermind
 npm install
 ```
+
+*code structure:*
 ```
-mastermind 
+mastermind
 ├── bin
 ├── public 
   ├── images
@@ -202,6 +277,8 @@ npm install --save sequelize
 npm install --save sequelize-cli
 npx sequelize init
 ```
+
+*code structure:*
 ```
 mastermind 
 ├── config 
@@ -215,6 +292,7 @@ mastermind
 After having set the database, I created database schemas for <code>Users</code> and <code>Games</code> tables that would 
 automatically migrate during th first run.
 
+*code structure:*
 ```
 mastermind
 ├── migrations
@@ -228,6 +306,7 @@ The next step was to work on the authentification process.<br>
 First, I created routes and database queries, which uses <code>express-session</code> 
 to store information about the user.<br>
 
+*code structure:*
 ```
 mastermind
 ├── controllers
@@ -243,6 +322,7 @@ To verify that user logged in, I added a verification middleware to <code>app.js
 app.use('/', protect, indexRouter);
 ```
 
+*code structure:*
 ```
 mastermind
 ├── config
@@ -252,6 +332,7 @@ mastermind
 
 Finally, I added a view and styles for front-end.<br>
 
+*code structure:*
 ```
 mastermind
 ├── public
@@ -269,24 +350,26 @@ For testing the application I used Mocha and Chai. I verified that user can
 register and login. 
 Moreover, I tested that the login/register forms are rendered.<br>
 
+*output:*
+```
+Auth page
+  GET /auth
+    ✔ returns 200 
+    ✔ login form rendered
+    ✔ register form rendered 
+  register
+    POST /auth/register
+      ✔ should return user id
+  login
+    POST /auth/login
+      ✔ should return id if user exists
+```
+
+*code structure:*
 ```
 mastermind
 ├── test
   ├── auth.test.js
-```
-
-```
-  Auth page
-    GET /auth
-      ✔ returns 200 
-      ✔ login form rendered
-      ✔ register form rendered 
-    register
-      POST /auth/register
-        ✔ should return user id
-    login
-      POST /auth/login
-        ✔ should return id if user exists
 ```
 </li>
 
@@ -296,6 +379,7 @@ I created a protected route for the home page:<br>
 <code>app.use('/', protect, indexRouter);</code>
 Then, I added views and styles:<br>
 
+*code structure:*
 ```
 mastermind
 ├── routes
@@ -318,6 +402,7 @@ mastermind
 Before creating a game page, I decided to add game logic that would 
 initiate the game object and check win conditions after each move.
 
+*code structure:*
 ```
 mastermind
 ├── game-logic
@@ -327,29 +412,28 @@ mastermind
   ├── getCode.js
   ├── hints.js
 ```
-First, the code will be generated in <code>game-logic/getCode.js</code> using <code>https://www.random.org/</code> API<br>
+First, the code will be generated in <code>game-logic/getCode.js</code> using <code>https://www.random.org/</code> API.<br>
 
 When the game is generated in the <code>game-logic/initialize.js</code>, a new game object will be returned with the folloing data:<br>
 
+*`gameData` object example:*
 ```
 {
-  gameData: {
-    totalAttempts: 10,
-    complexity: '0',
-    hints: 3,
-    numberOfPlayers: 1,
-    current: 0,
-    remainedGuesses: 10,
-    codeLen: 4,
-    status: 'In Progress',
-    style: '0',
-    array: [
-      '0', '1', '2',
-      '3', '4', '5',
-      '6', '7'
-    ],
-    date: 1673116760420
-  }
+  totalAttempts: 10,
+  complexity: '0',
+  hints: 3,
+  numberOfPlayers: 1,
+  current: 0,
+  remainedGuesses: 10,
+  codeLen: 4,
+  status: 'In Progress',
+  style: '0',
+  array: [
+    '0', '1', '2',
+    '3', '4', '5',
+    '6', '7'
+  ],
+  date: 1673116760420
 }
 ```
 
@@ -359,11 +443,7 @@ update game status after each move.<br>
 
 Finally, I added some tests for the game logic:<br>
 
-```
-mastermind
-├── test
-  ├── gamelogic.test.js
-```
+*output:*
 ```
 GAME LOGIC
     initiate.js
@@ -378,24 +458,59 @@ GAME LOGIC
       ✔ should return a correct hint digit
 ```
 
+*code structure:*
+```
+mastermind
+├── test
+  ├── gamelogic.test.js
+```
+</li>
+
+<li>
+Then, I started working on the `Game page` whicj is the key page for this project.<br>
+To start, I created routes for the game:<br>
+
+- GET `/game`: renders the game page
+- POST `/game`: updates the game object after the user's turn
+- POST `/game/start`: initiates the game object
+- POST `/game/finish`: saves the game to database and clears the game object
+- POST `/game/hint`: provide a hint for the current game
+
+*code structure:*
+```
+mastermind
+├── routes
+  ├── game.js
+├── public
+  ├── stylesheets
+    ├── style.css
+├── views
+  ├── private
+    ├── game.pug
+```
 
 </li>
+
+<li>
+List of played games
+</li>
+
 </ol>
 
 # Routes
 
 | Description | API Endpoint |
-| :---       | :---:        |
-| Register a new user | POST /auth/register <br>Body {username, password} |
-| Login | POST /auth/login <br>Body {username, password} |
-| Logout a new user | POST  /auth/logout <br>deletes user data from session |
-| Get home page | GET / <br>uses game data from session |
-| Get game history page | GET /history <br>uses game data from session |
-| Get game page | GET  /game <br>uses game data from session |
-| Start a new game | POST /game/start <br>uses game data from session |
-| Make a move | POST /game <br>uses game data from session |
-| Get a hint | POST /game/hit <br>uses game data from session |
-| Finish game | POST /game/finish <br>uses game data from session |
+| :---       | :---        |
+| Register a new user | `POST '/auth/register'` <br>Body {username, password} |
+| Sign in | `POST '/auth/login'` <br>Body {username, password} |
+| Sign out | `POST '/auth/logout'` <br>deletes user data from session |
+| Get home page | `GET '/'` <br>uses game data from session |
+| Get game history page | `GET '/history'` <br>uses game data from session |
+| Get game page | `GET  '/game'` <br>uses game data from session |
+| Start a new game | `POST '/game/start'` <br>uses game data from session |
+| Make a move | `POST '/game'` <br>uses game data from session |
+| Get a hint | `POST '/game/hint'` <br>uses game data from session |
+| Finish game | `POST '/game/finish'` <br>uses game data from session |
                        
 
 # Project specifications
