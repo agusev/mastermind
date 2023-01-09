@@ -109,8 +109,13 @@ describe('GAME LOGIC', function () {
 	describe('hints.js', function () {
 		it('should return correct hint digit', () => {
 			const code1 = '1234';
-			let hintArr1 = [1, 2, 4, '-', '-', '-', '-', '-', '-', '-'];
-			const result1 = GameLogic.getCurrentHintDigit(code1, hintArr1);
+			const level = '0';
+			let hintArr1 = ['1', '2', '4', '-', '-', '-', '-', '-', '-', '-'];
+			const result1 = GameLogic.getCurrentHintDigit(
+				code1,
+				hintArr1,
+				level
+			);
 
 			assert(result1 === 3);
 		});

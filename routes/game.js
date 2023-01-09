@@ -145,7 +145,8 @@ router.post('/hint', (req, res) => {
 		// gets a hint digit
 		let currentHintDigit = GameLogic.getCurrentHintDigit(
 			gameData.code,
-			hintArr
+			hintArr,
+			gameData.complexity
 		);
 
 		// sets number of hint to 0
