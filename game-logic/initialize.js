@@ -30,6 +30,7 @@ const initialize = (level, style) => {
 	gameData.status = 'In Progress';
 	gameData.style = style;
 	gameData.array = getArrayOfEmojii(style);
+	gameData.date = new Date(Date.now()).getTime();
 
 	switch (level) {
 		case '0':

@@ -1,5 +1,7 @@
 const loginForm = document.querySelector('#auth-login-form');
 const chooseForm = document.querySelector('#choose-form');
+const timerEl = document.querySelector('#timer');
+const time = timerEl.innerHTML;
 
 if (loginForm) {
 	loginForm.addEventListener('submit', (e) => {
@@ -30,4 +32,29 @@ if (chooseForm) {
 			console.log('not enough arguments!');
 		}
 	});
+}
+
+if (timerEl) {
+	let t = Math.floor((Date.now() - time) / 1000);
+	let seconds = Math.ceil((t % (60 * 60)) % 60);
+	let minutes = Math.floor((t % (60 * 60)) / 60);
+	seconds = seconds < 10 ? '0' + seconds : seconds;
+	minutes = minutes < 10 ? '0' + minutes : minutes;
+
+	timerEl.innerHTML = minutes + ':' + seconds;
+	timer();
+}
+
+function timer() {
+	setTimeout(function () {
+		let t = Math.floor((Date.now() - time) / 1000);
+		let seconds = Math.ceil((t % (60 * 60)) % 60);
+		let minutes = Math.floor((t % (60 * 60)) / 60);
+
+		seconds = seconds < 10 ? '0' + seconds : seconds;
+		minutes = minutes < 10 ? '0' + minutes : minutes;
+
+		timerEl.innerHTML = minutes + ':' + seconds;
+		timer();
+	}, 1000);
 }
