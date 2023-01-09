@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const GameLogic = require('../game-logic');
 const Games = require('../controllers/games');
-const constants = require('../config/constants');
 
 const handleError = (res, redirectUri) => (error) => {
 	console.log({ error });
@@ -19,6 +18,7 @@ router.get('/', (req, res) => {
 	if (req.session.games.length === 0) {
 		res.redirect('/');
 	}
+
 	const { username } = req.session;
 	const [gameData, guessesArr, feedbackArr, hintArr] = req.session.games[0];
 

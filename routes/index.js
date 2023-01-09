@@ -5,6 +5,10 @@ const router = express.Router();
 // @desc     Get home page
 // @access   Private
 router.get('/', function (req, res, next) {
+	if (req.session.games.length > 0) {
+		res.redirect('/game');
+	}
+
 	const { username, games } = req.session;
 
 	res.render('private/index', { username });
