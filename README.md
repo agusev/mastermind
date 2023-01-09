@@ -421,7 +421,6 @@ When the game is generated in the <code>game-logic/initialize.js</code>, a new g
   status: 'In Progress'
   remainedGuesses: 10,
   codeLen: 4,
-  status: 'In Progress',
   style: '0',
   array: [
     '0', '1', '2',
