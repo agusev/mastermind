@@ -9,6 +9,7 @@
 - [Database setup](#database-setup)
 - [Deployment](#deployment)
 - [Extensions](#extensions)
+- [Development Environment](#development-environment)
 - [Design Process](#design-process)
 - [Routes](#routes)
 - [Project specifications](#project-specifications)
@@ -33,7 +34,9 @@ There are 3 levels of game complexity:
 
 # Available scripts
 
-If this is you first run, go to build and run [instructions](#build-and-run-instructions)
+For the first run, folow these [instructions](#build-and-run-instructions)
+
+---
 
 Run locally on [localhost:3000](http://localhost:3000)
 
@@ -117,13 +120,13 @@ echo DATABASE_URL=postgres://`whoami`@localhost:5432/DATABASE_NAME >> .env
 
 Example of <code>.env</code>:<br>
 ```
-DATABASE_URL=postgres://aleksandr@localhost:5432/DATABASE_NAME
+DATABASE_URL=postgres://aleksandr@localhost:5432/masterminddb
 ```
 
 
 # Deployment
+Deployed to <a href="https://mastermind.onrender.com" target="_blank">render.com</a>
 
-Deployed to [Render](https://mastermind.onrender.com/auth)
 
 <img width="620" alt="deployment" src="https://user-images.githubusercontent.com/47907411/211167123-fbae33a4-e0ce-440c-ae45-804a8d6471c1.png">
 
@@ -134,6 +137,10 @@ Deployed to [Render](https://mastermind.onrender.com/auth)
 - [x] Change numbers into colored pegs, shapes, animals, etc
 - [x] Keep track of scores
 - [x] Time counter
+
+# Development Environment
+
+Visual Studio Code, iTerm, Postman were used.
 
 # Design Process
 <ol>
@@ -280,6 +287,8 @@ mastermind
 ├── migrations 
 ├── models
 ```
+
+*\* `models/index.js` is a part of `Sequelize` ORM and will not used in this project. `pg-promise` will be used instead. Will keep here for possible future use.*
 </li>
 
 <li>
@@ -483,6 +492,31 @@ mastermind
     ├── game.pug
 ```
 
+*code structure:*
+```
+mastermind
+├── test
+  ├── game.db.test.js
+```
+---
+To verify that that the finished game can be saved to the game table in the database
+and a list of games can be retrieved, I added the following tests.
+*output:*
+```
+Games DB
+  saveGame
+    ✔ should save a game
+  retrieveGames
+    ✔ should return a list of saved games
+```
+
+*code structure:*
+```
+mastermind
+├── test
+  ├── gamelogic.test.js
+```
+
 </li>
 
 <li>
@@ -545,6 +579,7 @@ mastermind
 ```
 
 # Challenges
+
 - When setting up a database, I encountered a problem: the port was already in use. 
   I managed to start the database by killing the existing process
 ```
@@ -553,6 +588,11 @@ sudo pkill -u postgres
 createdb test_database
 pg_ctl -D /usr/local/var/postgresql@15 start
 ```
+
+- I didn't manage to test all API endpoints due to a lack of knowledge of how 
+  to set up express-session using `Postman` or` Mocha`. Instead, 
+  I created unit tests for every function related to the game logic 
+  or interaction with the database.
 
 # Future work
 
