@@ -8,7 +8,7 @@
 
 html {
 	font-family: Arial, Helvetica, sans-serif;
-	color: #313335;
+	color: #444;
 	height: 100vh;
 	margin: 0;
 	padding: 0;
@@ -46,7 +46,7 @@ input:disabled {
 }
 
 header {
-	border-bottom: 1px #8d6cab solid;
+	border-bottom: 1px #444 solid;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -95,7 +95,7 @@ header#public-header {
 }
 
 footer {
-	border-top: 1px #8d6cab solid;
+	border-top: 1px #313335 solid;
 	padding: 0.5em 0;
 }
 
@@ -127,7 +127,6 @@ button {
 }
 
 /* Auth page */
-
 #auth {
 	width: 100%;
 	height: 100%;
@@ -194,7 +193,6 @@ button {
 /* END auth page */
 
 /* home page  */
-
 #rules {
 	width: 100%;
 	height: 100%;
@@ -265,34 +263,6 @@ h3 {
 	color: #fff;
 }
 
-.choose-level input[type='radio'] {
-	opacity: 0;
-	position: fixed;
-	width: 0;
-}
-
-.choose-level > div {
-	margin-left: 3rem;
-}
-
-.choose-level label {
-	display: inline-block;
-	background-color: #ddd;
-	padding: 0.5rem;
-	border: 2px solid #444;
-	border-radius: 4px;
-}
-
-.choose-level label:hover {
-	background-color: #00a0dc;
-	cursor: pointer;
-}
-
-.choose-level input[type='radio']:checked + label {
-	background-color: #00a0dc;
-	border-color: #313335;
-}
-
 #start-form {
 	width: 100%;
 	background: #dd5143;
@@ -320,9 +290,366 @@ h3 {
 	text-align: center;
 	margin-inline: 0.1rem;
 }
-
 /* End home page */
 
 /* Game page */
+/* radio buttons */
+.choose-digit-column input[type='radio'],
+.choose-level input[type='radio'] {
+	opacity: 0;
+	position: fixed;
+	width: 0;
+}
 
+.choose-digit-column label {
+	display: inline-block;
+	background-color: #e0f4be;
+	border: 2px solid #444;
+	border-radius: 4px;
+	font-size: 2rem;
+}
+
+.choose-level label {
+	display: inline-block;
+	background-color: #ddd;
+	padding: 0.5rem;
+	border: 2px solid #444;
+	border-radius: 4px;
+}
+
+.choose-digit-column label:hover,
+.choose-level label:hover {
+	background-color: #00a0dc;
+	cursor: pointer;
+}
+
+.choose-digit-column input[type='radio'] + label {
+	width: 3rem;
+	text-align: center;
+}
+
+.choose-digit-column input[type='radio']:checked + label,
+.choose-level input[type='radio']:checked + label {
+	background-color: #00a0dc;
+	border-color: #313335;
+	color: #fff;
+}
+
+.choose-level > div {
+	margin-left: 3rem;
+}
+
+/* game table view */
+.game-table {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+/* top game view */
+
+.main-numpad {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/* top feedback view */
+
+.game-top {
+	width: 100%;
+	padding: 1rem;
+}
+
+.guess-digit-column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #e68523;
+	border: 1px solid #444;
+	width: 100%;
+}
+
+/* feedback rows */
+div[class^='guess-row-'] {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	border: 1px white solid;
+	padding: 0.2rem 0;
+	min-height: 1.5rem;
+}
+
+div[class^='guess-row-'] > * {
+	margin-inline: 10px;
+}
+
+div[class^='guess-row-'] > p {
+	min-width: 7rem;
+	padding-inline: 1rem;
+	font-weight: 900;
+	text-align: right;
+}
+
+.attempt-result {
+	display: flex;
+	width: 4rem;
+	height: 2rem;
+	margin: 0 5px;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #444;
+	border-radius: 4px;
+	background-color: #e0f4be;
+	font-size: 1.5rem;
+}
+
+.attempt-result > p {
+	margin: 0;
+	padding: 0;
+}
+
+.attempt-para {
+	flex: 0;
+}
+
+#row-current {
+	background: #00a0dc;
+}
+
+#row-current p {
+	color: #fff;
+}
+
+#row-current .attempt-result {
+	background-color: #dd5143;
+}
+
+div[class^='guess-digit-row-'] {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* feedback and hint outputs */
+
+.help {
+	flex: 3;
+	display: flex;
+	justify-content: space-between;
+}
+
+.help > * {
+	flex: 1;
+}
+
+.help > div {
+	width: 100%;
+}
+
+.help > .attempt-feedback {
+	width: 100%;
+	text-align: left;
+}
+
+.help > .hint {
+	width: 100%;
+	text-align: right;
+}
+
+.hintArrOutput {
+	font-style: normal;
+	font-size: 1.5rem;
+}
+
+.attempt-feedback {
+	min-width: 5rem;
+}
+
+.attempt-feedback > p {
+	margin: 0;
+}
+
+.hint {
+	width: 15rem;
+}
+
+.hint > p {
+	margin: 0;
+	font-style: italic;
+	font-weight: 900;
+}
+
+/* bottom numpad */
+
+.choose-digit-column {
+	display: flex;
+	align-items: center;
+	background-color: #dd5143;
+	height: 100%;
+}
+
+.choose-digit-column p {
+	color: #fff;
+}
+
+#choose-form {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.choose-digit-row {
+	display: flex;
+}
+
+.numpad {
+	display: flex;
+	height: auto;
+	align-items: flex-end;
+	justify-content: center;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+.numpad-left {
+	margin-inline: 1rem;
+	width: 100%;
+}
+
+.numpad-right {
+	margin-right: 1rem;
+	display: flex;
+	flex-direction: column;
+	width: 20rem;
+}
+
+.numpad-right > div,
+#result-form,
+#result-form > div,
+#hint-form,
+#hint-form > div {
+	flex: 1;
+	height: 100%;
+}
+
+.numpad-right > div > input,
+#result-form > div > input,
+#hint-form > div > input {
+	height: 100%;
+}
+
+div[class^='choose-digit-row-'] {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #313335 !important;
+	padding: 0.5rem;
+	width: 100%;
+	height: 100%;
+}
+
+.digit-to-select {
+	font-weight: 900;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+/* buttons and inputs */
+.result-submit-btn input {
+	background-color: red;
+	color: white;
+}
+
+.guess-submit-btn input#hint-input {
+	background-color: #e68523;
+	color: white;
+}
+
+input#hint-input:disabled {
+	background-color: #e6842390;
+}
+
+input#hint-input:disabled:hover {
+	color: #fff !important;
+}
+
+input#choose-form-input:disabled:hover {
+	color: rgba(16, 16, 16, 0.3) !important;
+}
+
+.numpad-input {
+	display: flex;
+	width: 100%;
+	margin-bottom: 0.5rem;
+}
+
+.numpad-input > *,
+.numpad-input > form > div {
+	margin-bottom: 0.1rem;
+}
+
+.numpad-input input {
+	width: 100%;
+}
+.numpad > * {
+	margin-right: 0.2rem;
+}
+
+.guess-submit-btn {
+	margin: 0;
+	padding: 0;
+}
+
+.guess-submit-btn,
+.hint-submit-btn,
+.result-submit-btn {
+	text-align: center;
+}
+
+.guess-submit-btn:hover > input,
+.hint-submit-btn:hover > input,
+.result-submit-btn:hover > input {
+	color: #005c69 !important;
+}
+
+.guess-submit-btn input,
+.hint-submit-btn input,
+.result-submit-btn input {
+	width: 15rem;
+	height: 3rem;
+}
+
+/* bottom information view */
+
+.info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	background-color: #dd5143;
+	margin-top: 1rem;
+}
+
+.info-box {
+	flex: auto;
+	text-align: center;
+	border-inline: 1px solid #fff;
+}
+
+.info-top {
+	color: #fff;
+}
+
+.info-bottom {
+	color: #fff;
+}
 /* END game page */
