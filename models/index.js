@@ -1,5 +1,9 @@
 'use strict';
 
+// This file is a part of Sequelize ORM and isn't be used
+// I will keep it here as a part of sequelize boilerplate for possible future uses
+// Instead pg-promise is used
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
