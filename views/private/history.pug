@@ -3,4 +3,26 @@ extends layout
 block content
 
   div#wrapper
-    h1 history will be here
+    .game-list
+      .game-list-row
+        h3.game Player
+        h3.game Level
+        h3.game Result
+        h3.game Finished At
+
+      each game in gameList
+        - const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        - const complexityArr = ['Easy', 'Medium', 'Hard']
+        - const date = new Date(game.finished_at)  
+        - const year = date.getFullYear() < 10? '0'+ date.getFullYear() : date.getFullYear()
+        - const month = date.getMonth()
+        - const day = date.getDate() < 10? '0'+ date.getDate() : date.getDate()
+        - const hr = date.getHours() < 10? '0'+ date.getHours() : date.getHours()
+        - const min = date.getMinutes() < 10? '0'+ date.getMinutes() : date.getMinutes()
+        - const sec = date.getSeconds() < 10? '0'+ date.getSeconds() : date.getSeconds()
+
+        .game-list-row
+          p.game= game.username
+          p.game= complexityArr[game.complexity]
+          p.game= game.result
+          p.game= day + ' ' + months[month] + ' ' + year + ' ' + hr + ':' + min + ':' + sec
