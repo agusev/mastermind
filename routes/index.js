@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Games = require('../controllers/games');
 
 // @route    GET /
 // @desc     Get home page
@@ -18,7 +19,10 @@ router.get('/', function (req, res, next) {
 // @desc     Get history page
 // @access   Private
 router.get('/history', async function (req, res, next) {
-	res.render('private/history');
+	const { username } = req.session;
+	const gameList = await Games.retrieveGame().catch(handleError(res, '/'));
+
+	res.render('private/history', { username, gameList });
 });
 
 const handleError = (res, redirectUri) => (error) => {
