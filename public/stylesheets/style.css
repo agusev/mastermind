@@ -396,7 +396,7 @@ div[class^='guess-row-'] > * {
 }
 
 div[class^='guess-row-'] > p {
-	min-width: 7rem;
+	min-width: 8rem;
 	padding-inline: 1rem;
 	font-weight: 900;
 	text-align: right;
