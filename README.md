@@ -23,7 +23,7 @@
 Mastermind is a strategy game where the player has to guess a set of numbers. 
 At the start of the game the computer will randomly select a pattern of four different numbers from 0 to 7 for a total of 8 different numbers.
 At the end of each guess, the computer will provide one of the following responses as feedback:
-- The player had guess a correct number
+- The player had guessed a correct number
 - The player had guessed a correct number and its correct location
 - The player’s guess was incorrect
  
@@ -34,7 +34,7 @@ There are 3 levels of game complexity:
 
 # Available scripts
 
-For the first run, folow these [instructions](#build-and-run-instructions)
+For the first run, follow these [instructions](#build-and-run-instructions)
 
 ---
 
@@ -52,7 +52,7 @@ npm run test
 # Build and Run Instructions
 
 <ol>
-<li>Clone repository from github: 
+<li>Clone repository from GitHub: 
 
 ```
 git clone https://github.com/agusev/mastermind
@@ -110,7 +110,7 @@ Create a new database:
 createdb DATABASE_NAME
 ```
 
-Set up dotenv to enable user specific environment variables:  
+Set up dotenv to enable user-specific environment variables:  
 ```
 npm i --save dotenv
 echo ".env" >> .gitignore
@@ -135,12 +135,12 @@ Deployed to <a href="https://mastermind.onrender.com" target="_blank">render.com
 - [x] Add support to give hints
 - [x] Add a configurable “difficulty level” and adjust the number of numbers that are used
 - [x] Change numbers into colored pegs, shapes, animals, etc
-- [x] Keep track of scores
+- [x] Keep track of the scores
 - [x] Time counter
 
 # Development Environment
 
-Visual Studio Code, iTerm, Postman were used.
+Visual Studio Code, iTerm, and Postman were used.
 
 # Design Process
 <ol>
@@ -149,11 +149,11 @@ Visual Studio Code, iTerm, Postman were used.
 
 <img width="620" alt="logic" src="https://user-images.githubusercontent.com/47907411/210621068-633edcd3-62bf-4af0-946e-f493aca4dd1d.png">
 
-When user hits the start button, instance of a game object is initiated with 
+When a user hits the start button, an instance of a game object is initiated with 
 the following data structure:
 
 `gameData` object contains game configurations including level, style, 
-number of attempts and etc.
+how many attempts, etc.
 ```
 {
   totalAttempts: 7,
@@ -209,7 +209,7 @@ after each submission with the user's guesses.
 the user asks for a hint. This array also helps to check if the user is 
 already given a randomly selected digit from the secret code. Several 
 hints are defined by the game complexity unless the secret code contains 
-3 or more identic digits, e.g. '3233' or '4444', then the computer gives 
+3 or more identical digits, e.g. '3233' or '4444', then the computer gives 
 only one hint.
 
 ```
@@ -223,7 +223,7 @@ only one hint.
 The game continues until the user guesses the code or the user is out of attempts
 
 
-<li>Then I drew layouts for every page. This helped me define what objects I will need to return to the client side.</li><br>
+<li>I drew layouts for every page. This helped me define what objects I will need to return to the client side.</li><br>
 
 <img width="620" alt="wireframes" src="https://user-images.githubusercontent.com/47907411/211071400-561e22d2-dcd9-4587-be23-55ef1d721ea1.png">
 
@@ -288,12 +288,12 @@ mastermind
 ├── models
 ```
 
-*\* `models/index.js` is a part of `Sequelize` ORM and will not used in this project. `pg-promise` will be used instead. Will keep here for possible future use.*
+*\* `models/index.js` is a part of `Sequelize` ORM and will not be used in this project. `pg-promise` will be used instead. Will keep it here for possible future use.*
 </li>
 
 <li>
 After having set the database, I created database schemas for <code>Users</code> and <code>Games</code> tables that would 
-automatically migrate during th first run.
+automatically migrate during the first run.
 
 *code structure:*
 ```
@@ -306,7 +306,7 @@ mastermind
 
 <li>
 The next step was to work on the authentification process.<br>
-First, I created routes and database queries, which uses <code>express-session</code> 
+First, I created routes and database queries, which use <code>express-session</code> 
 to store information about the user.<br>
 
 *code structure:*
@@ -319,7 +319,7 @@ mastermind
 ```
 
 The configuration of the session is in <code>config/session.js</code><br>
-To verify that user logged in, I added a verification middleware to <code>app.js</code>:<br>
+To verify that the user logged in, I added a verification middleware to <code>app.js</code>:<br>
 
 ```
 app.use('/', protect, indexRouter);
@@ -353,8 +353,8 @@ mastermind
 
 <img width="620" alt="login" src="https://user-images.githubusercontent.com/47907411/211639939-538780f8-c0ae-405c-8a53-01ccfb2f6ca3.png">
 
-For testing the application I used Mocha and Chai. I verified that user can 
-register and login. 
+For testing the application I used Mocha and Chai. I verified that the user can 
+register and log in. 
 Moreover, I tested that the login/register forms are rendered.<br>
 
 *output:*
@@ -381,8 +381,8 @@ mastermind
 </li>
 
 <li>
-The next step was to create a home page, where a player could configure and start the game, read rules.<br>
-I created a protected route for the home page:<br>
+The next step was to create a home page, where a player could configure and start the game, and read the rules.<br>
+Also, I created a protected route for the home page:<br>
 <code>app.use('/', protect, indexRouter);</code>
 Then, I added views and styles:<br>
 
@@ -425,7 +425,7 @@ mastermind
 ```
 First, the code will be generated in <code>game-logic/getCode.js</code> using <code>https://www.random.org/</code> API.<br>
 
-When the game is generated in the <code>game-logic/initialize.js</code>, a new game object will be returned with the folloing data:<br>
+When the game is generated in the <code>game-logic/initialize.js</code>, a new game object will be returned with the following data:<br>
 
 *`gameData` object example:*
 ```
@@ -450,7 +450,7 @@ When the game is generated in the <code>game-logic/initialize.js</code>, a new g
 
 After each move, guess, feedback and hint arrays will be updated accordinngly.<br>
 <code>game-logic/checkGameStatus.js</code> contains win conditions and will 
-update game status after each move.<br>
+update the game status after each move.<br>
 
 Finally, I added some tests for the game logic:<br>
 
@@ -478,13 +478,13 @@ mastermind
 </li>
 
 <li>
-Then, I started working on the `Game page` whicj is the key page for this project.<br>
+I started working on the `Game page`, which is the key page for this project.<br>
 To start, I created routes for the game:<br>
 
 - GET `/game`: renders the game page
 - POST `/game`: updates the game object after the user's turn
 - POST `/game/start`: initiates the game object
-- POST `/game/finish`: saves the game to database and clears the game object
+- POST `/game/finish`: saves the game to the database and clears the game object
 - POST `/game/hint`: provide a hint for the current game
 
 *code structure:*
@@ -507,7 +507,7 @@ mastermind
   ├── game.db.test.js
 ```
 ---
-To verify that that the finished game can be saved to the game table in the database
+To verify that the finished game can be saved to the game table in the database
 and a list of games can be retrieved, I added the following tests.
 *output:*
 ```
@@ -532,8 +532,8 @@ mastermind
 </li>
 
 <li>
-For the list of played games, I simply retrive the information from the `games` table
-where the result was saved and then render as a list of games.
+For the list of played games, I simply retrieve the information from the `games` table
+where the result is saved and then render as a list of games.
 
 *layout:*
 
@@ -562,7 +562,7 @@ where the result was saved and then render as a list of games.
 # Project specifications
 - Create an account
 - Sign in
-- Retrieve list of public games
+- Retrieve a list of public games
 - Save a finished game
 - Create a new game
 - Play mastermind
@@ -614,7 +614,7 @@ pg_ctl -D /usr/local/var/postgresql@15 start
 
 # Future work
 
-- [ ] Add levels with 3-digit and 5 digit codes
+- [ ] Add levels with 3-digit and 5-digit codes
 - [ ] Add a multiplayer mode
 - [ ] Add a timer
 - [ ] add a timer for each attempt
