@@ -520,7 +520,8 @@ mastermind
 </li>
 
 <li>
-List of played games
+For the list of played games, I simply retrive the information from the `games` table
+where the result was saved and then render as a list of games.
 </li>
 
 </ol>
@@ -590,7 +591,7 @@ pg_ctl -D /usr/local/var/postgresql@15 start
 ```
 
 - I didn't manage to test all API endpoints due to a lack of knowledge of how 
-  to set up express-session using `Postman` or` Mocha`. Instead, 
+  to set up `express-session` using `Postman` or` Mocha`. Instead, 
   I created unit tests for every function related to the game logic 
   or interaction with the database.
 
