@@ -349,6 +349,10 @@ mastermind
     ├── layout.pug
 ```
 
+*layout:*
+
+<img width="620" alt="login" src="https://user-images.githubusercontent.com/47907411/211639939-538780f8-c0ae-405c-8a53-01ccfb2f6ca3.png">
+
 For testing the application I used Mocha and Chai. I verified that user can 
 register and login. 
 Moreover, I tested that the login/register forms are rendered.<br>
@@ -398,6 +402,10 @@ mastermind
     ├── layout.pug
     ├── rules.pug
 ```
+
+*layout:*
+
+<img width="620" alt="home" src="https://user-images.githubusercontent.com/47907411/211640572-c4c48794-35ad-4fbe-a5c2-b31bce964ef5.png">
 
 </li>
 
@@ -517,11 +525,20 @@ mastermind
   ├── gamelogic.test.js
 ```
 
+*layout:*
+
+<img width="620" alt="game" src="https://user-images.githubusercontent.com/47907411/211640258-4afea1bb-a903-49ca-9eb5-be819e404157.png">
+
 </li>
 
 <li>
 For the list of played games, I simply retrive the information from the `games` table
 where the result was saved and then render as a list of games.
+
+*layout:*
+
+<img width="620" alt="history" src="https://user-images.githubusercontent.com/47907411/211639461-0fab0fcd-935a-4d34-9092-3a6fd1ff2721.png">
+
 </li>
 
 </ol>
