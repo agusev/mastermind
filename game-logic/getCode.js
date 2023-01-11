@@ -1,5 +1,13 @@
 const axios = require('axios');
 
+const generateCode = () => {
+	let code = '';
+	for (let i = 0; i < 4; i++) {
+		code += Math.floor(6 * Math.random() + 1);
+	}
+	return code;
+};
+
 const getCode = async () => {
 	let result = '';
 	let url =
@@ -18,7 +26,9 @@ const getCode = async () => {
 			return result;
 		})
 		.catch((err) => {
+			console.debug('Axios failed, error:');
 			console.log(err);
+			return generateCode();
 		});
 
 	return code;
