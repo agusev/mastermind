@@ -43,7 +43,7 @@ describe('Auth page', function () {
 	});
 
 	// tests user to be save in database
-	describe('register', function () {
+	describe('register and login', function () {
 		const username = 'testUser';
 		const password = '12345';
 
@@ -61,33 +61,7 @@ describe('Auth page', function () {
 		describe('POST /auth/register', function () {
 			it('should return user id', async function () {
 				const { id } = await Users.findUserByUsername({ username });
-				console.debug(id);
-				expect(id).to.not.be.undefined;
-				expect(id).to.not.be.null;
-			});
-		});
-	});
-
-	// tests user can sign in
-	describe('login', function () {
-		const username = 'testUser';
-		const password = '12345';
-
-		// register a new user before each test
-		beforeEach(async function () {
-			return await Users.register({ username, password });
-		});
-
-		// delete the user before each test
-		afterEach(async function () {
-			const { id } = await Users.findUserByUsername({ username });
-			await Users.deleteUserById({ id });
-		});
-
-		describe('POST /auth/login', function () {
-			it('should return id if user exists', async function () {
-				const { id } = await Users.findUserByUsername({ username });
-				console.debug(id);
+				console.debug('user id: ' + id);
 				expect(id).to.not.be.undefined;
 				expect(id).to.not.be.null;
 			});
