@@ -3,7 +3,7 @@ const axios = require('axios');
 const generateCode = () => {
 	let code = '';
 	for (let i = 0; i < 4; i++) {
-		code += Math.floor(6 * Math.random() + 1);
+		code += Math.floor(8 * Math.random());
 	}
 	return code;
 };
