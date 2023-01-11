@@ -6,17 +6,19 @@ const SAVE_GAME =
 const RETRIEVE_GAMES = 'SELECT * FROM games ORDER BY finished_at DESC';
 
 const saveGame = ({ gameData }) => {
-	return db.one(SAVE_GAME, {
-		username: gameData.username,
-		total_attempts: gameData.totalAttempts,
-		remained_attempts: gameData.remainedGuesses,
-		result: gameData.status,
-		complexity: gameData.complexity,
-	});
+	return db
+		.one(SAVE_GAME, {
+			username: gameData.username,
+			total_attempts: gameData.totalAttempts,
+			remained_attempts: gameData.remainedGuesses,
+			result: gameData.status,
+			complexity: gameData.complexity,
+		})
+		.catch((err) => console.log({ err }));
 };
 
 const retrieveGame = () => {
-	return db.any(RETRIEVE_GAMES);
+	return db.any(RETRIEVE_GAMES).catch((err) => console.log({ err }));
 };
 
 module.exports = { saveGame, retrieveGame };

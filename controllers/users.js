@@ -18,17 +18,22 @@ const register = ({ username, password }) => {
 		.then(() => bcrypt.hash(password, 10))
 		.then((hash) => {
 			db.one(REGISTER_USER, { username, password: hash });
-		});
+		})
+		.catch((err) => console.log({ err }));
 };
 
 const findUserByUsername = async ({ username }) => {
-	let query = await db.query(LOOKUP_USER_BY_USERNAME, { username });
+	let query = await db
+		.query(LOOKUP_USER_BY_USERNAME, { username })
+		.catch((err) => console.log({ err }));
 
 	return query.length > 0 ? query[0] : null;
 };
 
 const deleteUserById = ({ id }) => {
-	return db.none(DELETE_USER_BY_ID, { id });
+	return db
+		.none(DELETE_USER_BY_ID, { id })
+		.catch((err) => console.log({ err }));
 };
 
 const login = ({ username, password }) => {
@@ -46,7 +51,8 @@ const login = ({ username, password }) => {
 			} else {
 				return null;
 			}
-		});
+		})
+		.catch((err) => console.log({ err }));
 };
 
 module.exports = { register, login, findUserByUsername, deleteUserById };

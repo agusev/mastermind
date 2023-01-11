@@ -28,8 +28,8 @@ router.get('/history', async function (req, res, next) {
 	});
 });
 
-const handleError = (res, redirectUri) => (error) => {
-	console.log({ error });
+const handleError = (res, redirectUri) => (err) => {
+	console.log({ err });
 	res.redirect(redirectUri);
 };
 

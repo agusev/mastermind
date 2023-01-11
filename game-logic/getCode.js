@@ -27,7 +27,7 @@ const getCode = async () => {
 		})
 		.catch((err) => {
 			console.debug('Axios failed, error:');
-			console.log(err);
+			console.log({ err });
 			return generateCode();
 		});
 
