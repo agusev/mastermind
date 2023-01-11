@@ -363,15 +363,12 @@ Moreover, I tested that the login/register forms are rendered.<br>
 ```
 Auth page
   GET /auth
-    ✔ returns 200 
-    ✔ login form rendered
-    ✔ register form rendered 
-  register
-    POST /auth/register
-      ✔ should return user id
-  login
-    POST /auth/login
-      ✔ should return id if user exists
+    ✔ returns 200 (536ms)
+    ✔ login form rendered (80ms)
+    ✔ register form rendered (65ms)
+register and login
+  POST /auth/register
+    ✔ should return user id
 ```
 
 *code structure:*
