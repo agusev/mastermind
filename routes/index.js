@@ -6,23 +6,26 @@ const Games = require('../controllers/games');
 // @desc     Get home page
 // @access   Private
 router.get('/', function (req, res, next) {
-	if (req.session.games.length > 0) {
-		res.redirect('/game');
-	}
-
+	const currentPage = 'home';
 	const { username, games } = req.session;
 
-	res.render('private/index', { username });
+	res.status(200).render('private/index', { username, games, currentPage });
 });
 
 // @route    GET /history
 // @desc     Get history page
 // @access   Private
 router.get('/history', async function (req, res, next) {
-	const { username } = req.session;
+	const currentPage = 'history';
+	const { username, games } = req.session;
 	const gameList = await Games.retrieveGame().catch(handleError(res, '/'));
 
-	res.render('private/history', { username, gameList });
+	res.status(200).render('private/history', {
+		username,
+		gameList,
+		games,
+		currentPage,
+	});
 });
 
 const handleError = (res, redirectUri) => (error) => {

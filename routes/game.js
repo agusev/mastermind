@@ -19,15 +19,18 @@ router.get('/', (req, res) => {
 		res.redirect('/');
 	}
 
-	const { username } = req.session;
-	const [gameData, guessesArr, feedbackArr, hintArr] = req.session.games[0];
+	const currentPage = 'game';
+	const { username, games } = req.session;
+	const [gameData, guessesArr, feedbackArr, hintArr] = games[0];
 
-	res.render('private/game', {
+	res.status(200).render('private/game', {
 		username,
 		gameData,
 		feedbackArr,
 		guessesArr,
 		hintArr,
+		games,
+		currentPage,
 	});
 });
 
