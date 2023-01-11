@@ -41,21 +41,16 @@ router.post('/start', async (req, res) => {
 	let data = [];
 	let gameData = GameLogic.initialize(level, style);
 
-	// generates the secret code
 	gameData.code = await GameLogic.getCode();
 
-	// initiates a feedback array and populates with ''
 	let feedbackArr = Array(gameData.totalAttempts).fill('');
 
-	// initiates a guesses array and populates with -1
 	let guessesArr = Array(gameData.totalAttempts)
 		.fill()
 		.map(() => Array(gameData.codeLen).fill(-1));
 
-	// initiates a hints array and populates with '-'
 	let hintArr = Array(gameData.totalAttempts).fill('-');
 
-	// put all game information to the data array and save to the current session
 	data[0] = gameData;
 	data[1] = guessesArr;
 	data[2] = feedbackArr;
@@ -76,12 +71,10 @@ router.post('/', async (req, res) => {
 
 	let input = '';
 
-	// parses input
 	Object.values(req.body).forEach((x) => {
 		input += x;
 	});
 
-	// checks win conditions
 	switch (
 		GameLogic.checkGameStatus(
 			parseInt(input),
@@ -109,20 +102,16 @@ router.post('/', async (req, res) => {
 			gameData.status = 'In Progress';
 	}
 
-	// updates feedback array
 	feedbackArr = GameLogic.updateMoveResult(input, feedbackArr, gameData);
 
-	// puts input to guesses array
 	Object.values(req.body).forEach((x, index) => {
 		guessesArr[gameData.current][index] = x;
 	});
 
-	// increments
 	if (gameData.current < gameData.totalAttempts) {
 		gameData.current += 1;
 	}
 
-	// decrements number of remained guesses
 	if (gameData.remainedGuesses > 0) {
 		gameData.remainedGuesses -= 1;
 	}
@@ -139,10 +128,8 @@ router.post('/hint', (req, res) => {
 	let [gameData, , , hintArr] = games[0];
 
 	if (gameData.hints > 0 && hintArr[gameData.current] == '-') {
-		// decriments number of hints
 		gameData.hints -= 1;
 
-		// gets a hint digit
 		let currentHintDigit = GameLogic.getCurrentHintDigit(
 			gameData.code,
 			hintArr,
@@ -155,7 +142,6 @@ router.post('/hint', (req, res) => {
 			gameData.hints = 0;
 		}
 
-		// puts the hinted digit to the hints array
 		hintArr[gameData.current] = currentHintDigit.toString();
 	} else {
 		console.log('cannot give a hint');
@@ -168,7 +154,6 @@ router.post('/hint', (req, res) => {
 // @desc     Deletes game data from session
 // @access   Private
 router.post('/finish', (req, res) => {
-	// deletes data array from session
 	req.session.games = [];
 
 	res.redirect('/');
