@@ -34,10 +34,15 @@ router.get('/', (req, res) => {
 // @access   Public
 router.post('/login', async (req, res) => {
 	const { username, password } = req.body;
-	const userId = await Users.findUserByUsername({ username });
+	const userId = await Users.findUserByUsername({ username }).catch((err) =>
+		console.log({ err })
+	);
 
 	if (!!userId) {
-		const correctCredentials = await Users.login({ username, password });
+		const correctCredentials = await Users.login({
+			username,
+			password,
+		}).catch((err) => console.log({ err }));
 		if (!!correctCredentials) {
 			Users.login({ username, password })
 				.then(handleLogin(req, res))
@@ -56,7 +61,9 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
 	const { username, password } = req.body;
 
-	const userId = await Users.findUserByUsername({ username });
+	const userId = await Users.findUserByUsername({ username }).catch((err) =>
+		console.log({ err })
+	);
 
 	if (userId === null) {
 		Users.register({ username, password })
