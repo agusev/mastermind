@@ -1,7 +1,6 @@
 const app = require('../app');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const assert = require('assert');
 const Users = require('../controllers/users');
 const { expect } = require('chai');
 
@@ -55,15 +54,16 @@ describe('Auth page', function () {
 
 		// delete the user before each test
 		afterEach(async function () {
-			let { id } = await Users.findUserByUsername({ username });
+			const { id } = await Users.findUserByUsername({ username });
 			await Users.deleteUserById({ id });
 		});
 
 		describe('POST /auth/register', function () {
 			it('should return user id', async function () {
-				let { id } = await Users.findUserByUsername({ username });
-
-				assert(id != undefined);
+				const { id } = await Users.findUserByUsername({ username });
+				console.debug(id);
+				expect(id).to.not.be.undefined;
+				expect(id).to.not.be.null;
 			});
 		});
 	});
@@ -80,15 +80,16 @@ describe('Auth page', function () {
 
 		// delete the user before each test
 		afterEach(async function () {
-			let { id } = await Users.findUserByUsername({ username });
+			const { id } = await Users.findUserByUsername({ username });
 			await Users.deleteUserById({ id });
 		});
 
 		describe('POST /auth/login', function () {
 			it('should return id if user exists', async function () {
-				let { id } = await Users.findUserByUsername({ username });
-
-				assert(id != undefined);
+				const { id } = await Users.findUserByUsername({ username });
+				console.debug(id);
+				expect(id).to.not.be.undefined;
+				expect(id).to.not.be.null;
 			});
 		});
 	});
