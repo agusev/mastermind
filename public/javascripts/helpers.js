@@ -1,7 +1,11 @@
 const loginForm = document.querySelector('#auth-login-form');
 const chooseForm = document.querySelector('#choose-form');
 const timerEl = document.querySelector('#timer');
-const time = timerEl.innerHTML;
+let time;
+
+if (timerEl) {
+	time = timerEl.innerHTML;
+}
 
 if (loginForm) {
 	loginForm.addEventListener('submit', (e) => {
@@ -9,7 +13,7 @@ if (loginForm) {
 
 		const formData = new FormData(loginForm);
 		const values = [...formData.values()];
-		console.log(values[0] == '');
+
 		if (values[0] === '' || values[0] === '') {
 			alert('incorrect input!!!');
 		} else {
