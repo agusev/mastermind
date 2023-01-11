@@ -73,7 +73,9 @@ cd mastermind
 </li>
 
 </li>
-
+<li>
+Install <a href="https://nodejs.org/en/" target="_blank">NodeJs</a>
+</li>
 <li>Install dependencies: 
 
 ```
@@ -571,8 +573,7 @@ where the result is saved and then render as a list of games.
 - NodeJS
 - Express
 - PostgreSQL
-- pg-promises
-- Sequelize
+- pg-promises / Sequelize
 - Pug
 
 # Dependencies
@@ -609,7 +610,7 @@ pg_ctl -D /usr/local/var/postgresql@15 start
 
 - I didn't manage to test all API endpoints due to a lack of knowledge of how 
   to set up `express-session` using `Postman` or` Mocha`. Instead, 
-  I created unit tests for every function related to the game logic 
+  I created tests for every function related to the game logic 
   or interaction with the database.
 
 # Future work
